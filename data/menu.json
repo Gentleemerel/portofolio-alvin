@@ -1,0 +1,39 @@
+
+[
+  {
+    "nama": "Nasi Goreng 🍚",
+    "kategori": "makanan",
+    "harga": "Rp. 12.000",
+    "deskripsi": "Nasi yang ditumis dan diberi bumbu dan dikasih topping"
+  },
+  {
+    "nama": "Nasi kebuli 🍚",
+    "kategori": "makanan",
+    "harga": "Rp. 15.000",
+    "deskripsi": "hidangan nasi berbumbu yang kaya rempah dan memiliki cita rasa gurih pekat"
+  },
+  {
+    "nama": "Nasi pecel 🍚",
+    "kategori": "makanan",
+    "harga": "Rp. 8.000",
+    "deskripsi": "nasi putih dipadu dengan aneka sayuran rebus lalu disiram dengan sambal kacang yang gurih dan sedikit pedas"
+  },
+  {
+    "nama": "Es Teh 🍵",
+    "kategori": "minuman",
+    "harga": "Rp. 12.000",
+    "deskripsi": "teh yang diseduh dengan air panas"
+  },
+  {
+    "nama": "Kopi☕",
+    "kategori": "minuman",
+    "harga": "Rp. 5.000",
+    "deskripsi": "minuman dari biji kopi yang diseduh dengan air panas"
+  },
+  {
+    "nama": "Es jeruk 🫖",
+    "kategori": "minuman",
+    "harga": "Rp. 6.000",
+    "deskripsi": "jeruk yang diperas lalu disajikan dalam bentuk jus"
+  }
+]

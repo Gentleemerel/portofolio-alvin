@@ -2,6 +2,26 @@
 const hargaNasi = 12000;
 const hargaEsTeh = 4000;
 
+// Daftar harga sesuai menu.json
+const daftarHarga = {
+    nasiGoreng: 12000,
+    nasiKebuli: 15000,
+    nasiPecel: 8000,
+    esTeh: 12000,
+    kopi: 5000,
+    esJeruk: 6000
+};
+
+// Nama menu sesuai menu.json
+const namaMenu = {
+    nasiGoreng: "Nasi Goreng",
+    nasiKebuli: "Nasi Kebuli",
+    nasiPecel: "Nasi Pecel",
+    esTeh: "Es Teh",
+    kopi: "Kopi",
+    esJeruk: "Es Jeruk"
+};
+
 function hitungTotal(jumlahNasi, jumlahEsTeh) {
     return (jumlahNasi * hargaNasi) + (jumlahEsTeh * hargaEsTeh);
 }
@@ -11,7 +31,7 @@ console.log("Hitung Total Harga");
 console.log(hitungTotal(4, 6));
 
 // 2. Hitung kembalian
-function hitungKembalian(totalHarga, uangBayar) {
+function keteranganKembalian(totalHarga, uangBayar) {
     if (uangBayar < totalHarga) { // uang bayar kurang
         return `Uang bayar kurang Rp ${totalHarga - uangBayar} dari total Rp ${totalHarga}`;
     } else if (uangBayar === totalHarga) { // uang bayar pas
@@ -22,9 +42,9 @@ function hitungKembalian(totalHarga, uangBayar) {
 }
 
 console.log("Hitung kembalian");
-console.log(hitungKembalian(20000, 20000)); // uang pas
-console.log(hitungKembalian(32000, 40000)); // uang lebih
-console.log(hitungKembalian(52000,50000)); // uang kurang
+console.log(keteranganKembalian(20000, 20000));
+console.log(keteranganKembalian(32000, 40000));
+console.log(keteranganKembalian(52000, 50000));
 
 // 2. MENAMPILKAN DAFTAR MENU
 console.log(`
@@ -44,30 +64,19 @@ console.log(`
 
 // 3. FUNGSI HITUNG TOTAL
 // Sesuai soal modul
-function hitungTotal(jumlahNasi, jumlahEs) {
-    return (jumlahNasi * hargaNasi) +
-           (jumlahEs * hargaEs);
-}
 
 // Fungsi tambahan untuk menghitung semua menu
 function hitungTotalMenu(pesanan) {
-
-    let total = hitungTotal(
-        pesanan.nasiGoreng || 0,
-        pesanan.esTeh || 0
-    );
+    let total = 0;
 
     for (const menu in pesanan) {
-
-        if (menu !== "nasiGoreng" && menu !== "esTeh") {
+        if (daftarHarga[menu] !== undefined) {
             total += pesanan[menu] * daftarHarga[menu];
         }
-
     }
 
     return total;
-}
-
+};
 
 // 4. ARROW FUNCTION HITUNG KEMBALIAN
 // Sesuai soal modul
@@ -142,20 +151,19 @@ DAFTAR PESANAN:
 
 // 7. CONTOH TRANSAKSI TIGA PEMBELI
 
-
 // PEMBELI 1: UANG KURANG
-
 const pesanan1 = {
-    ayamGeprek: 1,
-    airMineral: 1
+    nasiGoreng: 1,
+    kopi: 1
 };
 
-cetakStruk("Pembeli 1", pesanan1, 15000);
+cetakStruk("Pembeli 1", pesanan1, 10000);
+
 
 // PEMBELI 2: UANG PAS
 const pesanan2 = {
-    bakso: 1,
-    esTeh: 1
+    nasiPecel: 1,
+    esJeruk: 1
 };
 
 cetakStruk("Pembeli 2", pesanan2, 14000);
@@ -163,8 +171,101 @@ cetakStruk("Pembeli 2", pesanan2, 14000);
 
 // PEMBELI 3: UANG BERLEBIH
 const pesanan3 = {
-    nasiGoreng: 1,
-    esCokelat: 1
+    nasiKebuli: 1,
+    esTeh: 1
 };
 
 cetakStruk("Pembeli 3", pesanan3, 30000);
+
+
+let menu = [];
+
+const daftarMenu = document.querySelector("#daftar-menu");
+const jumlahMenu = document.querySelector("#jumlah-menu");
+
+async function muatMenu() {
+    if (jumlahMenu) {
+        jumlahMenu.textContent = "Memuat menu...";
+    }
+
+    try {
+        const response = await fetch("../data/menu.json");
+
+        if (!response.ok) {
+            throw new Error("Data menu gagal dimuat");
+        }
+
+        const data = await response.json();
+
+        menu = data;
+
+        console.log("Data menu berhasil dimuat:", menu);
+
+        tampilkanMenu(menu);
+
+    } catch (error) {
+        console.error("Error:", error);
+
+        if (jumlahMenu) {
+            jumlahMenu.textContent =
+                "Maaf, daftar menu belum dapat ditampilkan.";
+        }
+    }
+}
+
+function buatKartu(item) {
+    return `
+        <article class="kartu">
+            <span class="label">${item.kategori}</span>
+            <h3>${item.nama}</h3>
+            <h4>${item.harga}</h4>
+            <p>${item.deskripsi}</p>
+        </article>
+    `;
+}
+
+function tampilkanMenu(daftar) {
+    if (!daftarMenu) return;
+
+    daftarMenu.innerHTML = daftar
+        .map((item) => buatKartu(item))
+        .join("");
+
+    if (jumlahMenu) {
+        jumlahMenu.textContent =
+            `Menampilkan ${daftar.length} dari ${menu.length} menu`;
+    }
+}
+
+function pasangFilter(idTombol, kategori) {
+    const tombol = document.querySelector(idTombol);
+
+    if (!tombol) return;
+
+    tombol.addEventListener("click", () => {
+
+        document.querySelectorAll(".tombol-filter").forEach((btn) => {
+            btn.classList.remove("aktif");
+        });
+
+        tombol.classList.add("aktif");
+
+        if (kategori === "Semua") {
+            tampilkanMenu(menu);
+        } else {
+            const hasilFilter = menu.filter((item) =>
+                item.kategori.trim().toLowerCase() === kategori
+            );
+
+            tampilkanMenu(hasilFilter);
+        }
+    });
+}
+
+if (daftarMenu) {
+    pasangFilter("#filter-semua", "Semua");
+    pasangFilter("#filter-makanan", "makanan");
+    pasangFilter("#filter-minuman", "minuman");
+
+    muatMenu();
+}
