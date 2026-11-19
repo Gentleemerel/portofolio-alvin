@@ -446,3 +446,140 @@ body.gelap .kartu p {
 .menu-ponsel summary {
     cursor: pointer;
 }
+
+
+/* ===== HEADER DEEP CYAN GLOW ===== */
+
+header {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background: linear-gradient(
+        120deg,
+        #164E63,
+        #155E75,
+        #164E63
+    );
+
+    background-size: 200% 200%;
+
+    box-shadow:
+        0 4px 20px rgba(34, 211, 238, 0.18),
+        0 0 35px rgba(34, 211, 238, 0.10);
+
+    animation: cyanGradient 8s ease infinite;
+}
+
+/* Cahaya lembut di sekitar header */
+header::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+
+    background: radial-gradient(
+        circle at 30% 50%,
+        rgba(103, 232, 249, 0.20),
+        transparent 45%
+    );
+
+    z-index: -1;
+    pointer-events: none;
+
+    animation: cyanGlow 6s ease-in-out infinite alternate;
+}
+
+/* Animasi perpindahan gradient */
+@keyframes cyanGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Animasi cahaya */
+@keyframes cyanGlow {
+    from {
+        transform: translateX(-5%);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translateX(5%);
+        opacity: 1;
+    }
+}
+
+/* Menghormati pengaturan pengurangan animasi */
+@media (prefers-reduced-motion: reduce) {
+    header,
+    header::before {
+        animation: none;
+    }
+}
+
+
+/* ===== FOOTER DEEP CYAN GLOW ===== */
+
+footer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background: linear-gradient(
+        120deg,
+        #164E63,
+        #155E75,
+        #164E63
+    );
+
+    background-size: 200% 200%;
+
+    box-shadow:
+        0 -4px 20px rgba(34, 211, 238, 0.18),
+        0 0 35px rgba(34, 211, 238, 0.10);
+
+    animation: cyanGradient 8s ease infinite;
+}
+
+/* Cahaya lembut footer */
+footer::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+
+    background: radial-gradient(
+        circle at 30% 50%,
+        rgba(103, 232, 249, 0.20),
+        transparent 45%
+    );
+
+    z-index: -1;
+    pointer-events: none;
+
+    animation: cyanGlow 6s ease-in-out infinite alternate;
+}
+
+/* Warna tulisan footer */
+footer,
+footer p,
+footer a {
+    color: #FFFFFF;
+}
+
+/* Efek hover pada link */
+footer a {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+footer a:hover {
+    color: #67E8F9;
+    text-shadow: 0 0 10px rgba(103, 232, 249, 0.7);
+}

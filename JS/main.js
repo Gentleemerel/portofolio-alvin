@@ -117,7 +117,16 @@ async function muatProyek() {
     }
 }
 
-
+function buatKartu(item) {
+  return `
+    <article class="kartu">
+      <span class="label">${item.kategori}</span>
+      <h3>${item.judul}</h3>
+      <img src="${item.gambar}" alt="${item.alt}" width="280">
+      <p>${item.deskripsi}</p>
+    </article>
+  `;
+}
 
 function tampilkanProyek(daftar) {
   if (!daftarProyek) return;
@@ -150,9 +159,9 @@ function pasangFilter(idTombol, kategori) {
 if (daftarProyek) {
   muatProyek();
   pasangFilter("#filter-semua", "Semua");
-  pasangFilter("#filter-HTML", "HTML");
-  pasangFilter("#filter-CSS", "CSS");
-  pasangFilter("#filter-JavaScript", "JavaScript");
+  pasangFilter("#filter-html", "HTML");
+  pasangFilter("#filter-css", "CSS");
+  pasangFilter("#filter-javascript", "JavaScript");
 }
 
 // Animasi buka dan tutup menu

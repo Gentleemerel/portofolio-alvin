@@ -269,3 +269,61 @@ if (daftarMenu) {
 
     muatMenu();
 }
+
+// 2. Tema gelap (semua halaman)
+
+// Ambil tombol tema
+const tombolTema = document.querySelector("#tombol-tema");
+
+// Ambil tema yang tersimpan
+const temaTersimpan = localStorage.getItem("tema");
+
+// Terapkan tema saat halaman dibuka
+if (temaTersimpan === "gelap") {
+    document.body.classList.add("gelap");
+}
+
+// Atur tulisan tombol
+if (tombolTema) {
+    tombolTema.textContent = document.body.classList.contains("gelap")
+        ? "Mode Terang"
+        : "Mode Gelap";
+
+    // Ganti tema ketika tombol ditekan
+    tombolTema.addEventListener("click", () => {
+        document.body.classList.toggle("gelap");
+
+        // Simpan pilihan tema
+        if (document.body.classList.contains("gelap")) {
+            localStorage.setItem("tema", "gelap");
+            tombolTema.textContent = "Mode Terang";
+        } else {
+            localStorage.setItem("tema", "terang");
+            tombolTema.textContent = "Mode Gelap";
+        }
+    });
+}
+
+// Animasi buka dan tutup menu
+document.querySelectorAll(".menu-ponsel").forEach((menu) => {
+    const summary = menu.querySelector("summary");
+
+    summary.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (menu.open) {
+            // Tutup menu dengan animasi
+            menu.classList.add("menutup");
+
+            setTimeout(() => {
+                menu.open = false;
+                menu.classList.remove("menutup");
+            }, 400);
+
+        } else {
+            // Buka menu dengan animasi
+            menu.open = true;
+            menu.classList.remove("menutup");
+        }
+    });
+});
