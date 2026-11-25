@@ -584,3 +584,27 @@ footer a:hover {
     color: #67E8F9;
     text-shadow: 0 0 10px rgba(103, 232, 249, 0.7);
 }
+
+
+/* ===== 12. TOMBOL KEMBALI KE ATAS ===== */
+
+.tombol-atas {
+    display: block;
+    margin: 18px auto 0;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tombol-atas:hover {
+    background: #FFFFFF;
+    color: #164E63;
+    box-shadow: 0 0 15px rgba(103, 232, 249, 0.6);
+    transform: translateY(-3px);
+}

@@ -327,3 +327,16 @@ document.querySelectorAll(".menu-ponsel").forEach((menu) => {
         }
     });
 });
+
+// 6. TOMBOL KEMBALI KE ATAS
+
+const tombolAtas = document.getElementById("tombol-atas");
+
+if (tombolAtas) {
+    tombolAtas.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
